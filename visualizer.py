@@ -22,6 +22,10 @@ def _heron(a: float, b: float, c: float) -> float:
 _SQRT3 = math.sqrt(3.0)
 
 
+# Optimal vs suboptimal bars (match Streamlit result styling)
+_COMPARISON_BAR_COLORS = ("#34d399", "#f87171")
+_COMPARISON_BAR_EDGECOLOR = "#334155"
+
 plt.rcParams.update(
     {
         "figure.facecolor": "#0f172a",
@@ -472,8 +476,12 @@ def plot_comparison_bar(
     fig, ax = plt.subplots(figsize=(6, 4))
     cats = ["Optimal Shape", "Non-Optimal Shape"]
     vals = [optimal_value, suboptimal_value]
-    colors = ["#34d399", "#f87171"]
-    bars = ax.bar(cats, vals, color=colors, edgecolor="#334155")
+    bars = ax.bar(
+        cats,
+        vals,
+        color=list(_COMPARISON_BAR_COLORS),
+        edgecolor=_COMPARISON_BAR_EDGECOLOR,
+    )
     ax.set_ylabel(label)
     pct = 0.0
     if suboptimal_value > 0:
