@@ -6,6 +6,7 @@ Dark UI.
 from __future__ import annotations
 
 import math
+from pathlib import Path
 
 import streamlit as st
 
@@ -20,6 +21,10 @@ from visualizer import (
 
 # Optimal-dimension key for parallelogram / rhombus (radians → degrees in UI)
 _DIM_KEY_ANGLE_RAD = "angle_rad"
+
+_FORMULATION_REFERENCE_MD = (Path(__file__).resolve().parent / "mathematical_formulation.md").read_text(
+    encoding="utf-8"
+)
 
 st.set_page_config(
     page_title="Shape Optimizer",
@@ -447,6 +452,9 @@ if run:
         for line in info.get("kkt_lines", []):
             st.latex(line)
         st.latex(info["latex_solution"])
+        st.divider()
+        with st.expander("All eight shapes — full formulation reference", expanded=False):
+            st.markdown(_FORMULATION_REFERENCE_MD)
 
     with st.expander("Solver Steps", expanded=False):
         for step in result["steps"]:

@@ -64,11 +64,54 @@ General quadrilaterals (e.g. arbitrary trapezoids) need more parameters or const
 
 ---
 
+### 4. Triangle (maximize area, equilateral)
+
+**Objective:** $f(a,b,c) = A(a,b,c) = \sqrt{s(s-a)(s-b)(s-c)}$ with $s = (a+b+c)/2$ (Heron).
+
+**Constraint:** $g(a,b,c) = a+b+c - P = 0$
+
+**Lagrangian:** $\mathcal{L}(a,b,c,\lambda) = A(a,b,c) - \lambda(a+b+c-P)$
+
+**KKT / symmetry:** Stationarity together with symmetry under permuting $(a,b,c)$ implies **$a^\ast=b^\ast=c^\ast=P/3$** (equilateral triangle).
+
+**Solution:** **$a^\ast=b^\ast=c^\ast=P/3$**, **$A^\ast = \dfrac{\sqrt{3}}{36}P^2$**.
+
+---
+
+### 5. Circle (maximize area)
+
+**Objective:** $f(r) = \pi r^2$
+
+**Constraint:** $g(r) = 2\pi r - P = 0$ (circumference)
+
+**Lagrangian:** $\mathcal{L}(r,\lambda) = \pi r^2 - \lambda(2\pi r - P)$
+
+**KKT:** $\dfrac{d\mathcal{L}}{dr} = 2\pi r - 2\pi\lambda = 0$, and $2\pi r = P$
+
+**Solution:** **$r^\ast = P/(2\pi)$**, **$A^\ast = P^2/(4\pi)$**.
+
+---
+
+### 6. Parallelogram (maximize area)
+
+**Objective:** $f(a,b,\theta) = ab\sin\theta$
+
+**Constraint:** $g = 2a + 2b - P = 0$
+
+**Lagrangian:** $\mathcal{L}(a,b,\theta,\lambda) = ab\sin\theta - \lambda(2a+2b-P)$
+
+**KKT:** $\partial\mathcal{L}/\partial\theta = ab\cos\theta = 0 \Rightarrow \theta^\ast=\pi/2$ (**rectangle**). Then $\partial\mathcal{L}/\partial a = b\sin\theta - 2\lambda = 0$ and $\partial\mathcal{L}/\partial b = a\sin\theta - 2\lambda = 0$ with $2a+2b=P$ give $a=b$.
+
+**Solution:** **$a^\ast=b^\ast=P/4$**, $\theta^\ast=\pi/2$, **$A^\ast=(P/4)^2$** (a **square**).
+
+---
+
 ## 📁 Project Structure
 
 ```text
 lagrangian-shape-optimizer/
 ├── app.py
+├── mathematical_formulation.md
 ├── lagrangian_solver.py
 ├── shape_data.py
 ├── visualizer.py
