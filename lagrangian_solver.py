@@ -12,6 +12,8 @@ from typing import Any
 
 from shape_data import VALID_SHAPES
 
+__all__ = ["LagrangianShapeSolver"]
+
 # Safer printing of Unicode on Windows consoles.
 if hasattr(sys.stdout, "reconfigure"):
     try:
