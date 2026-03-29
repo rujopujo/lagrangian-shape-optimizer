@@ -137,6 +137,12 @@ python lagrangian_solver.py
 
 ---
 
+## 📄 License & Use
+
+This repository is maintained for an **academic mini-project** (Engineering Mathematics — NLPP / optimization demonstration). Reuse or redistribution beyond course requirements is at your discretion; cite the project if you build on it.
+
+---
+
 ## 📚 References
 
 1. Bazaraa, M. S., Sherali, H. D., & Shetty, C. M. *Nonlinear Programming: Theory and Algorithms* (Wiley).
