@@ -478,7 +478,7 @@ if run:
 
     st.markdown(
         '<p class="footer-mini">Shape Optimizer · '
-        '<a href="https://github.com/YOUR_USERNAME/lagrangian-shape-optimizer" style="color:#0a84ff;text-decoration:none;">GitHub</a></p>',
+        '<a href="https://github.com/rujopujo/lagrangian-shape-optimizer" style="color:#0a84ff;text-decoration:none;">GitHub</a></p>',
         unsafe_allow_html=True,
     )
 
