@@ -74,6 +74,9 @@ lagrangian-shape-optimizer/
 ├── visualizer.py
 ├── requirements.txt
 ├── render.yaml
+├── run_local.ps1
+├── .streamlit/
+│   └── config.toml
 └── README.md
 ```
 
