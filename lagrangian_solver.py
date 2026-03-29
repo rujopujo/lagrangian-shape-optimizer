@@ -20,6 +20,7 @@ if hasattr(sys.stdout, "reconfigure"):
         pass
 
 _SQRT3 = math.sqrt(3.0)
+_TWO_PI = 2.0 * math.pi
 _IMPROVEMENT_DENOM_EPS = 1e-15
 
 
@@ -48,7 +49,7 @@ def _constraint_residual(shape: str, d: dict[str, float], c: float) -> float:
     if shape == "parallelogram":
         return 2.0 * d["side_a"] + 2.0 * d["side_b"] - c
     if shape == "circle":
-        return 2.0 * math.pi * d["radius"] - c
+        return _TWO_PI * d["radius"] - c
     if shape == "rhombus":
         return 4.0 * d["side"] - c
     if shape == "cylinder":
@@ -104,7 +105,7 @@ class LagrangianShapeSolver:
 
         elif self.shape == "circle":
             p = val
-            r = p / (2.0 * math.pi)
+            r = p / _TWO_PI
             lam = r
             objective = math.pi * r**2
             optimal_dims = {"radius": r}
