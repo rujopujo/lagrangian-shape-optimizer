@@ -6,6 +6,7 @@ Used by the Streamlit app, ``lagrangian_solver``, and ``visualizer`` so shape ke
 
 from __future__ import annotations
 
+import math
 from typing import Any
 
 # All supported shape keys (lowercase).
@@ -192,6 +193,6 @@ def validate_input(shape: str, value: float) -> bool:
         raise ValueError(f"Unknown shape {shape!r}. Valid: {sorted(VALID_SHAPES)}")
     if value <= 0:
         raise ValueError("Constraint value must be positive (perimeter or volume).")
-    if not (value < float("inf") and value == value):
+    if not math.isfinite(value):
         raise ValueError("Constraint value must be a finite positive number.")
     return True
