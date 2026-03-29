@@ -135,10 +135,10 @@ class LagrangianShapeSolver:
 
         elif self.shape == "cylinder":
             v = val
-            r_star = (v / (2.0 * math.pi)) ** (1.0 / 3.0)
+            r_star = (v / math.tau) ** (1.0 / 3.0)
             h_star = 2.0 * r_star
             lam = 2.0 / r_star
-            objective = 2.0 * math.pi * r_star**2 + 2.0 * math.pi * r_star * h_star
+            objective = math.tau * r_star**2 + math.tau * r_star * h_star
             optimal_dims = {"radius": r_star, "height": h_star}
 
         elif self.shape == "box":
@@ -228,10 +228,10 @@ class LagrangianShapeSolver:
 
         elif self.shape == "cylinder":
             v = c
-            r_opt = (v / (2.0 * math.pi)) ** (1.0 / 3.0)
+            r_opt = (v / math.tau) ** (1.0 / 3.0)
             r_sub = 0.7 * r_opt
             h_sub = v / (math.pi * r_sub**2)
-            sub_obj = 2.0 * math.pi * r_sub**2 + 2.0 * math.pi * r_sub * h_sub
+            sub_obj = math.tau * r_sub**2 + math.tau * r_sub * h_sub
             label = "Surface Area"
             improvement_pct = _pct_better_minimize(opt_obj, sub_obj)
 
