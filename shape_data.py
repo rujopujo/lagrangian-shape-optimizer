@@ -28,6 +28,16 @@ PERIMETER_SHAPES: frozenset[str] = frozenset(
 )
 VOLUME_SHAPES: frozenset[str] = frozenset({"cylinder", "box", "sphere"})
 
+__all__ = [
+    "PERIMETER_SHAPES",
+    "VALID_SHAPES",
+    "VOLUME_SHAPES",
+    "get_sample_data",
+    "get_shape_info",
+    "uses_perimeter",
+    "validate_input",
+]
+
 
 def uses_perimeter(shape: str) -> bool:
     """True if constraint is perimeter / circumference (length), else volume."""
