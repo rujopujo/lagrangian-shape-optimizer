@@ -21,6 +21,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 _SQRT3 = math.sqrt(3.0)
 _TWO_PI = 2.0 * math.pi
+_FOUR_THIRDS_PI = (4.0 / 3.0) * math.pi
 _IMPROVEMENT_DENOM_EPS = 1e-15
 
 
@@ -57,7 +58,7 @@ def _constraint_residual(shape: str, d: dict[str, float], c: float) -> float:
     if shape == "box":
         return d["length"] * d["width"] * d["height"] - c
     if shape == "sphere":
-        return (4.0 / 3.0) * math.pi * d["radius"] ** 3 - c
+        return _FOUR_THIRDS_PI * d["radius"] ** 3 - c
     return 0.0
 
 
@@ -150,9 +151,9 @@ class LagrangianShapeSolver:
 
         elif self.shape == "sphere":
             v = val
-            r = ((3.0 * v) / (4.0 * math.pi)) ** (1.0 / 3.0)
+            r = (v / _FOUR_THIRDS_PI) ** (1.0 / 3.0)
             lam = 2.0 / r
-            objective = 4.0 * math.pi * r**2
+            objective = 3.0 * _FOUR_THIRDS_PI * r**2
             optimal_dims = {"radius": r}
 
         else:
