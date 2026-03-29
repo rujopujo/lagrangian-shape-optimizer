@@ -84,6 +84,8 @@ lagrangian-shape-optimizer/
 
 ## 🚀 How to Run Locally
 
+Requires **Python 3.10+** (see **Technologies Used** for the recommended version).
+
 ```bash
 pip install -r requirements.txt
 streamlit run app.py
