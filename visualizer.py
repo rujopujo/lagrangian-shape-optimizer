@@ -19,6 +19,9 @@ def _heron(a: float, b: float, c: float) -> float:
     return float(np.sqrt(x))
 
 
+_SQRT3 = math.sqrt(3.0)
+
+
 plt.rcParams.update(
     {
         "figure.facecolor": "#0f172a",
@@ -46,7 +49,7 @@ def plot_shape_2d(shape: str, optimal_dims: dict[str, float]) -> Figure:
 
     if sh == "triangle":
         a = float(optimal_dims["side_a"])
-        h = math.sqrt(3.0) * a / 2.0
+        h = _SQRT3 * a / 2.0
         poly = np.array([[0.0, 0.0], [a, 0.0], [a / 2.0, h]])
         ax.add_patch(Polygon(poly, closed=True, facecolor="#38bdf8", edgecolor="#0c4a6e", linewidth=2))
         ax.set_aspect("equal")
@@ -187,7 +190,7 @@ def plot_objective_vs_dimension(
 
     elif sh == "circle":
         P = constraint_value
-        r = np.linspace(P / (8 * math.pi), P / (2 * math.pi) * 0.99, 400)
+        r = np.linspace(P / (4 * math.tau), P / math.tau * 0.99, 400)
         area = math.pi * r**2
         r_opt = float(optimal_dims["radius"])
         ax.plot(r, area, color="#34d399", label=r"$A=\pi r^2$")
@@ -236,13 +239,13 @@ def plot_objective_vs_dimension(
 
     elif sh == "cylinder":
         V = constraint_value
-        r = np.linspace(0.2, max(3.0 * (V / (2 * math.pi)) ** (1.0 / 3.0), 1.0), 400)
+        r = np.linspace(0.2, max(3.0 * (V / math.tau) ** (1.0 / 3.0), 1.0), 400)
         h = V / (math.pi * r**2)
-        sa = 2 * math.pi * r**2 + 2 * math.pi * r * h
+        sa = math.tau * r**2 + math.tau * r * h
         r_opt = float(optimal_dims["radius"])
         sa_opt = float(
-            2 * math.pi * r_opt**2
-            + 2 * math.pi * r_opt * float(optimal_dims["height"])
+            math.tau * r_opt**2
+            + math.tau * r_opt * float(optimal_dims["height"])
         )
         ax.plot(r, sa, color="#2e7d32", label="Surface area")
         ax.scatter([r_opt], [sa_opt], color="red", s=80, zorder=5, label="Minimum")
