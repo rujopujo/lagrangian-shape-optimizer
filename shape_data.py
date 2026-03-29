@@ -1,5 +1,7 @@
 """
 Preset shape parameters and LaTeX-friendly metadata for the Lagrangian shape optimizer.
+
+Used by the Streamlit app, ``lagrangian_solver``, and ``visualizer`` so shape keys stay in sync.
 """
 
 from __future__ import annotations
