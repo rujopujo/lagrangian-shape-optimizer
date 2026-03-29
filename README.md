@@ -106,6 +106,34 @@ General quadrilaterals (e.g. arbitrary trapezoids) need more parameters or const
 
 ---
 
+### 7. Rhombus (maximize area)
+
+**Objective:** $f(s,\theta) = s^2\sin\theta$
+
+**Constraint:** $g = 4s - P = 0$ (fixing $s = P/4$)
+
+**Lagrangian:** $\mathcal{L}(s,\theta,\lambda) = s^2\sin\theta - \lambda(4s-P)$
+
+**KKT:** $\partial\mathcal{L}/\partial\theta = s^2\cos\theta = 0 \Rightarrow \theta^\ast=\pi/2$; with $s=P/4$ from the constraint.
+
+**Solution:** **$A^\ast=(P/4)^2$** (a **square**).
+
+---
+
+### 8. Sphere (minimize surface area)
+
+**Objective:** $f(r) = 4\pi r^2$
+
+**Constraint:** $g(r) = \frac{4}{3}\pi r^3 - V = 0$
+
+**Lagrangian:** $\mathcal{L}(r,\lambda) = 4\pi r^2 - \lambda\left(\frac{4}{3}\pi r^3 - V\right)$
+
+**KKT:** $\dfrac{d\mathcal{L}}{dr} = 8\pi r - 4\pi\lambda r^2 = 0 \Rightarrow \lambda = 2/r$, and $\frac{4}{3}\pi r^3 = V$
+
+**Solution:** **$r^\ast = \left(\dfrac{3V}{4\pi}\right)^{1/3}$**, **$S^\ast = 4\pi r^{\ast 2}$**.
+
+---
+
 ## 📁 Project Structure
 
 ```text
