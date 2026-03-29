@@ -24,6 +24,46 @@ General quadrilaterals (e.g. arbitrary trapezoids) need more parameters or const
 
 ---
 
+## ⚙️ How this project works (code)
+
+At a high level the app is a thin **Streamlit** UI on top of **closed-form math**—there is no numerical optimizer (no SciPy `minimize` loop).
+
+1. **`shape_data.py`** — Central metadata for each supported shape: whether the constraint is **perimeter / circumference** or **volume**, human-readable dimension names, validation rules, LaTeX snippets for the UI, and a **feasible “competitor”** geometry used only to illustrate how much better the KKT optimum is.
+
+2. **`lagrangian_solver.py`** — A `LagrangianShapeSolver` is constructed with a shape name and a single constraint value ($P$ or $V$). Its `solve()` method **branches** to the analytic KKT / symmetry solution for that shape (same formulas as in the README), computes the optimal objective (area or surface area), optional step-by-step text for the UI, and constraint residuals as a sanity check.
+
+3. **`app.py`** — Reads the user’s shape and input, calls `validate_input`, runs the solver, and displays metrics, **optimal vs competitor** comparison, and plots.
+
+4. **`visualizer.py`** — Builds **Matplotlib** figures: 2D schematics where relevant, objective-vs-parameter curves, Lagrangian contour sketches, and a comparison bar chart. Figures are returned as `Figure` objects for `st.pyplot`.
+
+5. **`mathematical_formulation.md`** — Shipped as reference text; the Mathematics expander in the app renders this file so users can read the full eight-shape write-up in one place.
+
+Together, this is an **end-to-end demo**: from NLPP definition → KKT solution → visualization, with everything reproducible from the command line (`python lagrangian_solver.py`) or the browser.
+
+---
+
+## 🌍 Applications & where this kind of optimization shows up
+
+**Everyday intuition**
+
+- **Fence / land use:** “What rectangle gives the largest garden for a fixed amount of fencing?” is exactly the rectangle problem here (optimum: a square). Similar questions appear in agriculture, landscaping, and zoning when area must be maximized under a boundary limit.
+- **Packaging and material cost:** For a **fixed volume**, shapes with **smaller surface area** use less material (metal, cardboard, plastic). The cylinder and box results (e.g. can-like $h=2r$, cube-like box) mirror classical **operations research** and **packaging design** trade-offs—minimize material or coating subject to volume.
+
+**Engineering and design**
+
+- **Structural and mechanical design** often minimizes weight or cost subject to stress or volume constraints; the mathematics scales to more variables, but the **Lagrangian and KKT conditions** remain the theoretical backbone.
+- **CAD / simulation** workflows sometimes expose optimization (parameter sweeps, shape optimization). Large industrial problems use **numerical** solvers, but the **same KKT theory** explains what “optimal” means at a constraint.
+
+**Software and tools that use constrained optimization (related ideas)**
+
+- **Numerical libraries:** **SciPy** (`scipy.optimize`), **NLopt**, **IPOPT**, and **CVXPY** solve constrained problems when closed forms are unavailable; many implement or approximate **KKT-based** methods.
+- **Machine learning:** Constrained training (e.g. penalties, projected gradients, **Lagrangians** in constrained objectives) uses related calculus-of-variations ideas at scale.
+- **Simulation suites:** **MATLAB Optimization Toolbox**, **ANSYS**, **COMSOL**, and similar tools include constrained optimization for geometry and physics models—again, often numerical, but grounded in the same NLPP / KKT framework illustrated here.
+
+This repository stays intentionally small: it **implements the math in closed form** so the Lagrangian method is transparent. Real production software typically chains **models + numerical optimization**; understanding these toy geometries makes that stack easier to reason about.
+
+---
+
 ## 🧮 Mathematical Formulation
 
 ### 1. Rectangle (maximize area)
