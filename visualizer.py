@@ -106,12 +106,13 @@ def plot_shape_2d(shape: str, optimal_dims: dict[str, float]) -> Figure:
     elif sh == "rhombus":
         s = float(optimal_dims["side"])
         ang = float(optimal_dims["angle_rad"])
+        ca, sa = math.cos(ang), math.sin(ang)
         poly = np.array(
             [
                 [0.0, 0.0],
                 [s, 0.0],
-                [s + s * math.cos(ang), s * math.sin(ang)],
-                [s * math.cos(ang), s * math.sin(ang)],
+                [s + s * ca, s * sa],
+                [s * ca, s * sa],
             ]
         )
         ax.add_patch(Polygon(poly, closed=True, facecolor="#f472b6", edgecolor="#831843", linewidth=2))
