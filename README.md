@@ -73,7 +73,6 @@ lagrangian-shape-optimizer/
 ├── shape_data.py
 ├── visualizer.py
 ├── requirements.txt
-├── render.yaml
 ├── run_local.ps1
 ├── .streamlit/
 │   └── config.toml
@@ -101,8 +100,7 @@ python lagrangian_solver.py
 
 ## 🌐 Live Demo
 
-**Placeholder:** `https://lagrangian-shape-optimizer.onrender.com`  
-(Replace with your Render URL after deployment.)
+**Streamlit Community Cloud:** [lagrangian-shape-optimizer.streamlit.app](https://lagrangian-shape-optimizer.streamlit.app/)
 
 ---
 
