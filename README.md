@@ -195,14 +195,14 @@ python lagrangian_solver.py
 
 ## 👥 Contributors
 
-| Name | GitHub | Role |
-|------|--------|------|
-| | | |
-| | | |
-| | | |
-| | | |
-| | | |
-| | | |
+| Name | GitHub |
+|------|--------|
+|Ruhaan Joshi|[rujopujo](https://github.com/rujopujo)|
+|Om Thakur|[omthakur9819](https://github.com/omthakur9819)|
+|Sarthak Bongane|[sarthak03bongane](https://github.com/sarthak03bongane)|
+|Rudra Jain|[Rudrajain756](https://github.com/Rudrajain756)|
+|Shubham Singh|[shubhamsinnn](https://github.com/shubhamsinnn)|
+|Shamita Chavan|[sha11082006-gif](https://github.com/sha11082006-gif)|
 
 ---
 
