@@ -18,6 +18,9 @@ from visualizer import (
     plot_shape_2d,
 )
 
+# Optimal-dimension key for parallelogram / rhombus (radians → degrees in UI)
+_DIM_KEY_ANGLE_RAD = "angle_rad"
+
 st.set_page_config(
     page_title="Shape Optimizer",
     page_icon="📐",
@@ -421,7 +424,7 @@ if run:
     for i, k in enumerate(keys_order):
         with metric_cols[i]:
             v = float(dims[k])
-            if k == "angle_rad":
+            if k == _DIM_KEY_ANGLE_RAD:
                 st.metric("Angle θ", f"{math.degrees(v):.2f}°")
             else:
                 st.metric(k.replace("_", " ").title(), f"{v:.4f}")
