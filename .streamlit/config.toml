@@ -1,3 +1,4 @@
+# Dark theme defaults for the shape optimizer Streamlit app (matches app.py CSS).
 [browser]
 gatherUsageStats = false
 
