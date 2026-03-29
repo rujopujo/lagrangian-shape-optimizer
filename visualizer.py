@@ -90,10 +90,11 @@ def plot_shape_2d(shape: str, optimal_dims: dict[str, float]) -> Figure:
         a = float(optimal_dims["side_a"])
         b = float(optimal_dims["side_b"])
         ang = float(optimal_dims["angle_rad"])
+        ca, sa = math.cos(ang), math.sin(ang)
         ox, oy = 0.0, 0.0
         bx, by = a, 0.0
-        cx, cy = a + b * math.cos(ang), b * math.sin(ang)
-        dx, dy = b * math.cos(ang), b * math.sin(ang)
+        cx, cy = a + b * ca, b * sa
+        dx, dy = b * ca, b * sa
         poly = np.array([[ox, oy], [bx, by], [cx, cy], [dx, dy]])
         ax.add_patch(Polygon(poly, closed=True, facecolor="#a78bfa", edgecolor="#4c1d95", linewidth=2))
         ax.set_aspect("equal")
