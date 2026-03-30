@@ -126,6 +126,7 @@ PRESETS = {
     },
 }
 
+st.session_state.setdefault("n_vars_input", 5)
 
 if "__pending_n_vars_input" in st.session_state:
     st.session_state["n_vars_input"] = int(st.session_state.pop("__pending_n_vars_input"))
@@ -212,7 +213,6 @@ with st.sidebar:
         "Variables (n)",
         min_value=2,
         max_value=10,
-        value=5,
         step=1,
         key="n_vars_input",
         help="How many entries in vector x.",
