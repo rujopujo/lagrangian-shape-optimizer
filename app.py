@@ -358,6 +358,9 @@ st.markdown(
 
 # --- Sidebar ----------------------------------------------------------------
 with st.sidebar:
+    st.markdown("### Application")
+    st.sidebar.page_link("pages/general_solver.py", label="General solver", icon="∇")
+    st.markdown("---")
     st.markdown("### Setup")
     _sidebar_heading("Problem")
     choice = st.selectbox(
