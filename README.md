@@ -40,7 +40,9 @@ At a high level the **Streamlit** UI calls the **closed-form** solver only; it d
 
 6. **`numeric_shape_solver.py`** — Optional **general numeric** path: **`NumericShapeSolver`** encodes the same objective and equality constraint $g(\mathbf{x})=0$ per shape and uses **`scipy.optimize.minimize` … `method="SLSQP"`** (sequential least squares programming) with variable bounds. **`compare_analytic_vs_numeric(shape, value)`** runs the closed-form solver and the numeric solver and reports relative error on the objective—useful to show that KKT solutions match what a black-box constrained optimizer finds. Run `python numeric_shape_solver.py` for a batch comparison.
 
-Together, this is an **end-to-end demo**: from NLPP definition → KKT solution → visualization, with everything reproducible from the command line (`python lagrangian_solver.py`) or the browser, plus an optional numeric cross-check (`python numeric_shape_solver.py`).
+7. **`lagrangian_nlp_general.py`** — **`solve_lagrangian_nlp_5d(...)`** solves a **smooth NLPP in exactly five variables** with **user-supplied** objective and **equality** constraints (one or more), via SciPy (**SLSQP** or **trust-constr**). This is the same KKT idea as the Lagrangian formalism, realized **numerically** when you do not want to solve $\nabla f = \sum_j \lambda_j \nabla g_j$ by hand. Includes a small demo: minimize $\sum_i x_i^2$ subject to $\sum_i x_i = 1$. Run `python lagrangian_nlp_general.py`.
+
+Together, this is an **end-to-end demo**: from NLPP definition → KKT solution → visualization, with everything reproducible from the command line (`python lagrangian_solver.py`) or the browser, plus optional numeric cross-checks (`python numeric_shape_solver.py`, `python lagrangian_nlp_general.py`).
 
 ---
 
@@ -183,6 +185,7 @@ lagrangian-shape-optimizer/
 ├── app.py
 ├── mathematical_formulation.md
 ├── lagrangian_solver.py
+├── lagrangian_nlp_general.py
 ├── numeric_shape_solver.py
 ├── shape_data.py
 ├── visualizer.py
@@ -209,6 +212,7 @@ Optional CLI checks:
 ```bash
 python lagrangian_solver.py
 python numeric_shape_solver.py
+python lagrangian_nlp_general.py
 ```
 
 ---
