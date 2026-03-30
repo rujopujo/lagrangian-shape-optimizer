@@ -1,6 +1,6 @@
 # 📐 Geometric Shape Optimizer using Lagrangian Method (NLPP)
 
-This project demonstrates **nonlinear programming with one equality constraint** (NLPP) on classic geometry problems. Each problem is solved with the **Lagrangian** and **Karush–Kuhn–Tucker (KKT)** conditions in **closed form**—no black-box numerical optimizers.
+This project demonstrates **nonlinear programming with one equality constraint** (NLPP) on classic geometry problems. The main path uses the **Lagrangian** and **Karush–Kuhn–Tucker (KKT)** conditions in **closed form**. A separate module, **`numeric_shape_solver.py`**, solves the **same** models with **SciPy**’s **SLSQP** (a general numeric solver) so you can compare analytic vs black-box results.
 
 ---
 
@@ -26,7 +26,7 @@ General quadrilaterals (e.g. arbitrary trapezoids) need more parameters or const
 
 ## ⚙️ How this project works (code)
 
-At a high level the app is a thin **Streamlit** UI on top of **closed-form math**—there is no numerical optimizer (no SciPy `minimize` loop).
+At a high level the **Streamlit** UI calls the **closed-form** solver only; it does not invoke SciPy at runtime.
 
 1. **`shape_data.py`** — Central metadata for each supported shape: whether the constraint is **perimeter / circumference** or **volume**, human-readable dimension names, validation rules, LaTeX snippets for the UI, and a **feasible “competitor”** geometry used only to illustrate how much better the KKT optimum is.
 
@@ -38,7 +38,9 @@ At a high level the app is a thin **Streamlit** UI on top of **closed-form math*
 
 5. **`mathematical_formulation.md`** — Shipped as reference text; the Mathematics expander in the app renders this file so users can read the full eight-shape write-up in one place.
 
-Together, this is an **end-to-end demo**: from NLPP definition → KKT solution → visualization, with everything reproducible from the command line (`python lagrangian_solver.py`) or the browser.
+6. **`numeric_shape_solver.py`** — Optional **general numeric** path: **`NumericShapeSolver`** encodes the same objective and equality constraint $g(\mathbf{x})=0$ per shape and uses **`scipy.optimize.minimize` … `method="SLSQP"`** (sequential least squares programming) with variable bounds. **`compare_analytic_vs_numeric(shape, value)`** runs the closed-form solver and the numeric solver and reports relative error on the objective—useful to show that KKT solutions match what a black-box constrained optimizer finds. Run `python numeric_shape_solver.py` for a batch comparison.
+
+Together, this is an **end-to-end demo**: from NLPP definition → KKT solution → visualization, with everything reproducible from the command line (`python lagrangian_solver.py`) or the browser, plus an optional numeric cross-check (`python numeric_shape_solver.py`).
 
 ---
 
@@ -181,6 +183,7 @@ lagrangian-shape-optimizer/
 ├── app.py
 ├── mathematical_formulation.md
 ├── lagrangian_solver.py
+├── numeric_shape_solver.py
 ├── shape_data.py
 ├── visualizer.py
 ├── requirements.txt
@@ -201,10 +204,11 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-Optional CLI check:
+Optional CLI checks:
 
 ```bash
 python lagrangian_solver.py
+python numeric_shape_solver.py
 ```
 
 ---

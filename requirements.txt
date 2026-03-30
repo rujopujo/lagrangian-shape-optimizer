@@ -1,4 +1,5 @@
 # EM-IV mini project — Streamlit UI + plotting
 numpy
+scipy
 matplotlib
 streamlit
