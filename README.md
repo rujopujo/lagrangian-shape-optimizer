@@ -42,6 +42,10 @@ At a high level the **Streamlit** UI calls the **closed-form** solver only; it d
 
 7. **`lagrangian_nlp_general.py`** — General-N constrained solver: **`solve_lagrangian_nlp_nd(...)`** works for **3, 4, 5, or more variables**, with wrappers `solve_lagrangian_nlp_3d`, `solve_lagrangian_nlp_4d`, and `solve_lagrangian_nlp_5d`. Uses SciPy (**SLSQP** or **trust-constr**) for equality constraints. Run `python lagrangian_nlp_general.py` for 3/4/5/8-variable demos.
 8. **`app_general_nlp.py`** — Streamlit playground for branch testing of N-variable constrained optimization (choose N, objective mode, bounds, weights, and solve in-browser without touching production app flow).
+9. **`utils/general_numeric_lagrangian.py` + `pages/general_solver.py`** — General **N-variable numeric** constrained solver with a Streamlit page:
+   - Backend: `solve_general_numeric_lagrangian(...)` (SciPy `minimize` with `SLSQP`, supports equality constraints and optional inequalities `h(x) <= 0`).
+   - UI: `pages/general_solver.py` lets you type `f(x)` and add/edit constraints `g_i(x)=0` and `h_j(x)<=0` using safe `eval` with `x[0], x[1], ...`.
+   - After solving, the page shows `x*`, estimated multipliers, constraint residuals, and a numeric KKT residual check.
 
 Together, this is an **end-to-end demo**: from NLPP definition → KKT solution → visualization, with everything reproducible from the command line (`python lagrangian_solver.py`) or the browser, plus optional numeric cross-checks (`python numeric_shape_solver.py`, `python lagrangian_nlp_general.py`).
 
@@ -190,6 +194,11 @@ lagrangian-shape-optimizer/
 ├── lagrangian_nlp_general.py
 ├── numeric_shape_solver.py
 ├── shape_data.py
+├── pages/
+│   └── general_solver.py
+├── utils/
+│   ├── __init__.py
+│   └── general_numeric_lagrangian.py
 ├── visualizer.py
 ├── requirements.txt
 ├── run_local.ps1
@@ -208,6 +217,8 @@ Requires **Python 3.10+** (see **Technologies Used** for the recommended version
 pip install -r requirements.txt
 streamlit run app.py
 ```
+
+When you run `streamlit run app.py`, Streamlit automatically loads extra pages from the `pages/` folder (including `General solver`).
 
 Optional CLI checks:
 
